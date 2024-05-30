@@ -9,7 +9,7 @@ interface HeartRateChartProps {
 }
 
 const HeartRateChart: React.FC<HeartRateChartProps> = ({ data, color }) => {
-    const strokeColor = color? color : '#A8E6CF';
+    const strokeColor = color ? color : '#A8E6CF';
     return (
         <div style={{ width: '100%', height: '30%' }}>
             <ResponsiveContainer width="100%" height="100%">

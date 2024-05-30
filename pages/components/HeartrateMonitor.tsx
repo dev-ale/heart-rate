@@ -29,7 +29,7 @@ const HeartRateMonitor: React.FC<HeartRateMonitorProps> = ({ heartRate, zone }) 
         }}>
             <span style={{ fontSize: '12rem' }}>{heartRate !== null ? heartRate : '--'}</span> {/* Increased font size */}
            <FaHeart style={{ fontSize: '3rem', color: 'white' }} />
-            <span style={{ fontSize: '3rem' }}>{zone !== null ? zone.name : '--'}</span> {/* Increased font size */}
+            <span style={{ fontSize: '3rem' }}>{zone ? zone.name : '--'}</span> {/* Increased font size */}
         </div>
     );
 };

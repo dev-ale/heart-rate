@@ -1,7 +1,6 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import HeartRateMonitor from "./components/HeartrateMonitor";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import HeartRateChart from "./components/HeartrateChart";
 
 const inter = Inter({ subsets: ["latin"] });
