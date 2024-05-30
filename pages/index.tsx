@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import HeartRateMonitor from "./components/heartrateMonitor";
+import HeartRateMonitor from "./components/HeartrateMonitor";
 
 const inter = Inter({ subsets: ["latin"] });
 

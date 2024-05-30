@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import HeartRateChart from "./HeartrateChart";
 
 
 export default function HeartRateMonitor() {
     const [status, setStatus] = useState('Disconnected');
     const [heartRate, setHeartRate] = useState<number | null>(null);
     const [zone, setZone] = useState<{ name: string, color: string } | null>(null);
+    const [heartRateData, setHeartRateData] = useState<{ time: string; heartRate: number }[]>([]);
 
     const serviceUuid = 'heart_rate';
     const characteristicUuid = 'heart_rate_measurement';
@@ -48,6 +50,11 @@ export default function HeartRateMonitor() {
         const zone = calculateHeartRateZone(heartRate, 31, 87);
         setZone(zone);
 
+        // Update heart rate data for the chart
+        const currentTime = new Date().toLocaleTimeString();
+        setHeartRateData(prevData => [...prevData, { time: currentTime, heartRate }]);
+
+    
         // Set the document title to the heart rate
         document.title = 'Heart Rate: ' + heartRate;
         document.body.style.backgroundColor = zone.color;
@@ -85,6 +92,7 @@ export default function HeartRateMonitor() {
             <p id="status">Status: {status}</p>
             <p id="heart-rate">Heart Rate: {heartRate !== null ? heartRate : 'N/A'}</p>
             <p id="zone">Zone: {zone !== null ? zone.name : 'N/A'}</p>
+            <HeartRateChart data={heartRateData} />
         </div>
     );
 }
