@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import HeartRateMonitor from "./components/HeartrateMonitor";
 import { useState } from "react";
 import HeartRateChart from "./components/HeartrateChart";
+import ElapsedTime from "./components/ElapsedTime";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +12,7 @@ export default function Home() {
     const [zone, setZone] = useState<{ name: string, color: string } | null>(null);
     const [heartRateData, setHeartRateData] = useState<{ time: string; heartRate: number }[]>([]);
     const [device, setDevice] = useState<BluetoothDevice | null>(null);
+    const [startTime, setStartTime] = useState<Date | null>(null);
 
     const serviceUuid = 'heart_rate';
     const characteristicUuid = 'heart_rate_measurement';
@@ -38,6 +40,7 @@ export default function Home() {
 
           setDevice(device);
           setStatus('Connected');
+          setStartTime(new Date());
       } catch (error) {
           console.log('Error: ' + error);
           setStatus('Disconnected (Error)');
@@ -52,6 +55,7 @@ export default function Home() {
           setHeartRate(null);
           setZone(null);
           setHeartRateData([]);
+          setStartTime(null);
           document.body.style.backgroundColor = '#FFFFFF'; // Reset background color
       }
   };
@@ -105,11 +109,16 @@ export default function Home() {
           >
               {status === 'Connected' ? 'Disconnect' : 'Connect'}
           </button>
+          <br />
+          <br />
+          <br />
           <HeartRateMonitor heartRate={heartRate} zone={zone} />
           <br />
           <br />
           <br />
           <HeartRateChart data={heartRateData} color={zone?.color} />
+          <ElapsedTime startTime={startTime} color={zone?.color}/>
+          <br />
       </div>
   );
 };
