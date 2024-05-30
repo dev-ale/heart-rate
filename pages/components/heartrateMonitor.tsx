@@ -40,7 +40,7 @@ export default function HeartRateMonitor() {
     const handleHeartRateMeasurement = (event: Event) => {
         const target = event.target as BluetoothRemoteGATTCharacteristic;
         const value = target.value;
-        const heartRate = value.getUint8(1);
+        const heartRate = value ? value.getUint8(1) : 0;
         console.log(event);
 
         setHeartRate(heartRate);
